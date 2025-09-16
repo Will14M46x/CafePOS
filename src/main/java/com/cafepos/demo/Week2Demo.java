@@ -6,6 +6,7 @@ import com.cafepos.catalog.SimpleProduct;
 import com.cafepos.common.Money;
 import com.cafepos.domain.LineItem;
 import com.cafepos.domain.Order;
+import com.cafepos.domain.OrderIds;
 
 public final class Week2Demo {
     public static void main(String[] args) {

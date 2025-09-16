@@ -1,4 +1,6 @@
 package com.cafepos.domain;
 
-public class OrderIds {
+public interface OrderIds {
+    String id();
+    String items();
 }
