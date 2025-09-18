@@ -1,6 +1,7 @@
 package com.cafepos.common;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public final class Money implements Comparable<Money> {
     private final BigDecimal amount;
@@ -22,8 +23,18 @@ public final class Money implements Comparable<Money> {
         if (qty <= 0) throw new IllegalArgumentException("amount required");
         return new Money(this.amount.multiply(new BigDecimal(qty)));
     }
+    public Money multiply(BigDecimal factor) {
+        Objects.requireNonNull(factor, "factor required");
+        return new Money(this.amount.multiply(factor));
+    }
 
+    @Override
     public int compareTo(Money o) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return amount.toPlainString();
     }
 }

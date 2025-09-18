@@ -2,6 +2,8 @@ package com.cafepos.domain;
 
 import com.cafepos.common.Money;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +20,27 @@ public final class Order {
         return items.stream().map(LineItem::lineTotal).reduce(Money.zero(), Money::add);
     }
     public Money taxAtPercent(int percent) {
-        if (percent <= 0) throw new IllegalArgumentException("percent must be greater than zero");
-        return subtotal().multiply(percent/100);
+        if (percent < 0) {
+            throw new IllegalArgumentException("percent must be >= 0");
+        }
+        Money multiplied = subtotal().multiply(percent);
+        BigDecimal numeric = BigDecimal.valueOf(
+                Double.parseDouble(multiplied.toString())
+        );
+
+        BigDecimal divided = numeric.divide(
+                BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP
+        );
+        return Money.of(divided.doubleValue());
     }
     public Money totalWithTax(int percent) {
         if (percent <= 0) throw new IllegalArgumentException("percent must be greater than zero");
-        return subtotal().add(subtotal().multiply(percent/100));
+        return subtotal().add(taxAtPercent(percent));
+    }
+    public long getId() {
+        return id;
+    }
+    public List<LineItem> getItems() {
+        return items;
     }
 }
