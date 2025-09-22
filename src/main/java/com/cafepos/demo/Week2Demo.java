@@ -6,6 +6,7 @@ import com.cafepos.catalog.SimpleProduct;
 import com.cafepos.common.Money;
 import com.cafepos.domain.LineItem;
 import com.cafepos.domain.Order;
+import com.cafepos.domain.OrderIds;
 
 public final class Week2Demo {
     public static void main(String[] args) {
@@ -14,11 +15,11 @@ public final class Week2Demo {
                 Money.of(2.50)));
         catalog.add(new SimpleProduct("P-CCK", "Chocolate Cookie", Money.of(3.50)));
                 Order order = new Order(OrderIds.next());
-        order.addItem(new LineItem(catalog.findById("P- ESP").orElseThrow(), 2));
-                order.addItem(new LineItem(catalog.findById("P- CCK").orElseThrow(), 1));
+        order.addItem(new LineItem(catalog.findById("P-ESP").orElseThrow(), 2));
+                order.addItem(new LineItem(catalog.findById("P-CCK").orElseThrow(), 1));
         int taxPct = 10;
-        System.out.println("Order #" + order.id());
-        System.out.println("Items: " + order.items().size());
+        System.out.println("Order #" + order.getId());
+        System.out.println("Items: " + order.getItems().size());
         System.out.println("Subtotal: " + order.subtotal());
         System.out.println("Tax (" + taxPct + "%): " +
                 order.taxAtPercent(taxPct));
