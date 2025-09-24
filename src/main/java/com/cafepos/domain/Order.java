@@ -1,6 +1,7 @@
 package com.cafepos.domain;
 
 import com.cafepos.common.Money;
+import com.cafepos.payment.PaymentStrategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -37,10 +38,15 @@ public final class Order {
         if (percent <= 0) throw new IllegalArgumentException("percent must be greater than zero");
         return subtotal().add(taxAtPercent(percent));
     }
-    public long getId() {
+    public long id() {
         return id;
     }
     public List<LineItem> getItems() {
         return items;
+    }
+
+    public void pay(PaymentStrategy strategy) {
+        if (strategy == null) throw new IllegalArgumentException("strategy required");
+        strategy.pay(this);
     }
 }
