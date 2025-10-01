@@ -8,14 +8,17 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Order {
+public final class Order implements OrderPublisher{
     private final long id;
     private final List<LineItem> items = new ArrayList<>();
+    private final List<OrderObserver> observers = new ArrayList<>();
+
     public Order(long id) {
         this.id = id;
     }
     public void addItem(LineItem li) {
         items.add(li);
+        notifyObservers("itemAdded");
     }
     public Money subtotal() {
         return items.stream().map(LineItem::lineTotal).reduce(Money.zero(), Money::add);
@@ -48,5 +51,29 @@ public final class Order {
     public void pay(PaymentStrategy strategy) {
         if (strategy == null) throw new IllegalArgumentException("strategy required");
         strategy.pay(this);
+    }
+
+    @Override
+    public void register(OrderObserver o) {
+        if (o == null) throw new IllegalArgumentException("observer required");
+        observers.add(o);
+    }
+
+    @Override
+    public void unregister(OrderObserver o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers(Order order, String eventType) {}
+
+    public void notifyObservers(String eventType) {
+        for (OrderObserver observer : observers) {
+            observer.updated(this,eventType);
+        }
+    }
+
+    public void markReady(){
+        notifyObservers("ready");
     }
 }
