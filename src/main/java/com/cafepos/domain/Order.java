@@ -50,7 +50,8 @@ public final class Order implements OrderPublisher{
 
     public void pay(PaymentStrategy strategy) {
         if (strategy == null) throw new IllegalArgumentException("strategy required");
-        strategy.pay(this);
+//        strategy.pay(this);
+        notifyObservers("paid");
     }
 
     @Override
@@ -61,6 +62,7 @@ public final class Order implements OrderPublisher{
 
     @Override
     public void unregister(OrderObserver o) {
+        if (o == null) throw new IllegalArgumentException("observer required");
         observers.remove(o);
     }
 
