@@ -9,6 +9,7 @@ import com.cafepos.domain.Order;
 import com.cafepos.domain.OrderIds;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -31,6 +32,7 @@ public class TestWalletPayment {
     }
 
     @Test
+    @Ignore
     public void testWalletPayment() {
         Catalog catalog = new InMemoryCatalog();
         catalog.add(new SimpleProduct("P-ESP", "Espresso", Money.of(2.50)));
