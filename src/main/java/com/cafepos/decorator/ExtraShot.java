@@ -3,10 +3,11 @@ package com.cafepos.decorator;
 import com.cafepos.catalog.Product;
 import com.cafepos.common.Money;
 
-public class ExtraShot extends ProductDecorator{
+public class ExtraShot extends ProductDecorator implements Priced{
     private static final Money SURCHARGE = Money.of(0.80);
     public ExtraShot(Product base) {
         super(base);
+        base.basePrice().add(price());
     }
     @Override
     public String name(){
@@ -15,4 +16,5 @@ public class ExtraShot extends ProductDecorator{
     public Money price(){
         return (base instanceof Priced p ? p.price() : base.basePrice()).add(SURCHARGE);
     }
+
 }
