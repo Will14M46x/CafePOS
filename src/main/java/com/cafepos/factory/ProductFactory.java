@@ -29,6 +29,7 @@ public final class ProductFactory {
                 default -> throw new IllegalArgumentException("Unknown addon: "+parts[i]);
             };
         }
+
         return p;
     }
 }
