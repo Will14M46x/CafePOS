@@ -1,0 +1,1 @@
+Exposing the Factory based construction is the obvious choice due to its simplicity. It allows developers to build complex drinks with only a simple recipe String without needing to change code. This makes the system easier to extend with base drinks, whereas Manual chaining would require constant changes.
