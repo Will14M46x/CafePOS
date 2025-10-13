@@ -50,7 +50,7 @@ public final class Order implements OrderPublisher{
 
     public void pay(PaymentStrategy strategy) {
         if (strategy == null) throw new IllegalArgumentException("strategy required");
-//        strategy.pay(this);
+        strategy.pay(this);
         notifyObservers("paid");
     }
 
