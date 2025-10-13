@@ -11,7 +11,7 @@ public class OatMilk extends ProductDecorator implements Priced{
     }
     @Override
     public String name(){
-        return base.name() + " Oat Milk";
+        return base.name() + " + Oat Milk";
     }
     public Money price(){
         return (base instanceof Priced p ? p.price() : base.basePrice()).add(SURCHARGE);

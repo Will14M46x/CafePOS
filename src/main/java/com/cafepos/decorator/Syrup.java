@@ -11,7 +11,7 @@ public class Syrup extends ProductDecorator implements Priced{
     }
     @Override
     public String name(){
-        return base.name() + " Syrup";
+        return base.name() + " + Syrup";
     }
     public Money price(){
         return (base instanceof Priced p ? p.price() : base.basePrice()).add(SURCHARGE);
