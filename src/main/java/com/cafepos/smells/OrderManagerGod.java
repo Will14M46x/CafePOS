@@ -14,14 +14,18 @@ import com.cafepos.pricing.*;
 
 //God Class
 public class OrderManagerGod {
-    //Global/Static State
-    //Primitive Obsession
-    public static int TAX_PERCENT = 10;
-    //Global/Static State
-    public static String LAST_DISCOUNT_CODE = null;
+    private final ProductFactory productFactory;
+    private final ReceiptPrinter receiptPrinter;
+    private final int taxPercent;
+
+    public OrderManagerGod(ProductFactory productFactory, ReceiptPrinter receiptPrinter, int taxPercent){
+        this.productFactory = productFactory;
+        this.receiptPrinter = receiptPrinter;
+        this.taxPercent = taxPercent;
+    }
     //Long Method
     //God Class
-    public static String process(String recipe, int qty, String paymentType, String discountCode, boolean printReceipt) {
+    public String process(String recipe, int qty, String paymentType, String discountCode, boolean printReceipt) {
         ProductFactory factory = new ProductFactory();
         Product product = factory.create(recipe);
         Money unitPrice;
@@ -35,18 +39,13 @@ public class OrderManagerGod {
         if (qty <= 0) qty = 1;
         Money subtotal = unitPrice.multiply(qty);
         DiscountPolicy discountPolicy = DiscountPolicyFactory.getDiscountPolicy(discountCode);
-        TaxPolicy taxPolicy = new FixedRateTaxPolicy(TAX_PERCENT);
+        TaxPolicy taxPolicy = new FixedRateTaxPolicy(taxPercent);
         PricingService pricingService = new PricingService(discountPolicy, taxPolicy);
         PricingService.PricingResult pricingResult = pricingService.price(subtotal);
 
-        if (discountCode != null) {
-            LAST_DISCOUNT_CODE = discountCode;
-        }
-
-
         PaymentStrategy paymentStrategy;
         Order order = new Order(OrderIds.next());
-        order.addItem(new LineItem(new ProductFactory().create(recipe),qty));
+        order.addItem(new LineItem(productFactory.create(recipe),qty));
 
         if (paymentType != null) {
             if (paymentType.equalsIgnoreCase("CASH")) {
@@ -60,9 +59,7 @@ public class OrderManagerGod {
             }
             paymentStrategy.pay(order);
         }
-        //Feature Envy
-        ReceiptPrinter receiptPrinter = new ReceiptPrinter();
-        String out = receiptPrinter.format(recipe,qty,pricingResult,TAX_PERCENT);
+        String out = receiptPrinter.format(recipe,qty,pricingResult,taxPercent);
         if (printReceipt) {
             System.out.println(out);
         }
