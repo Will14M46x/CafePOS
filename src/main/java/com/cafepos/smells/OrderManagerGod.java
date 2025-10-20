@@ -3,9 +3,7 @@ package com.cafepos.smells;
 import com.cafepos.common.Money;
 import com.cafepos.factory.ProductFactory;
 import com.cafepos.catalog.Product;
-import com.cafepos.pricing.DiscountPolicy;
-import com.cafepos.pricing.DiscountPolicyFactory;
-import com.cafepos.pricing.LoyaltyPercentDiscount;
+import com.cafepos.pricing.*;
 
 //God Class
 public class OrderManagerGod {
@@ -40,12 +38,10 @@ public class OrderManagerGod {
                 Money.of(subtotal.asBigDecimal().subtract(discount.asBigDecimal()));
         if (discounted.asBigDecimal().signum() < 0) discounted =
                 Money.zero();
-        //Feature Envy
-        //Shotgun Surgery Risk
-        //Duplicated Logic
-        var tax = Money.of(discounted.asBigDecimal()
-                .multiply(java.math.BigDecimal.valueOf(TAX_PERCENT))
-                .divide(java.math.BigDecimal.valueOf(100)));
+
+        TaxPolicy taxPolicy = new FixedRateTaxPolicy(TAX_PERCENT);
+        Money tax = taxPolicy.taxOn(discounted);
+
         //Primitive Obsession
         //Feature Envy
         //Shotgun Surgery Risk
