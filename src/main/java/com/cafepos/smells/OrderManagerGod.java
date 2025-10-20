@@ -1,8 +1,15 @@
 package com.cafepos.smells;
 
 import com.cafepos.common.Money;
+import com.cafepos.domain.LineItem;
+import com.cafepos.domain.Order;
+import com.cafepos.domain.OrderIds;
 import com.cafepos.factory.ProductFactory;
 import com.cafepos.catalog.Product;
+import com.cafepos.payment.CardPayment;
+import com.cafepos.payment.CashPayment;
+import com.cafepos.payment.PaymentStrategy;
+import com.cafepos.payment.WalletPayment;
 import com.cafepos.pricing.*;
 
 //God Class
@@ -37,18 +44,21 @@ public class OrderManagerGod {
         }
 
 
-
+        PaymentStrategy paymentStrategy;
+        Order order = new Order(OrderIds.next());
+        order.addItem(new LineItem(new ProductFactory().create(recipe),qty));
 
         if (paymentType != null) {
             if (paymentType.equalsIgnoreCase("CASH")) {
-                System.out.println("[Cash] Customer paid " + pricingResult.total() + " EUR");
+                paymentStrategy = new CashPayment();
             } else if (paymentType.equalsIgnoreCase("CARD")) {
-                System.out.println("[Card] Customer paid " + pricingResult.total() + " EUR with card ****1234");
+                paymentStrategy = new CardPayment("1234123412341234");
             } else if (paymentType.equalsIgnoreCase("WALLET")) {
-                System.out.println("[Wallet] Customer paid " + pricingResult.total() + " EUR via wallet user-wallet-789");
+                paymentStrategy = new WalletPayment("user-wallet-789");
             } else {
-                System.out.println("[UnknownPayment] " + pricingResult.total());
+                paymentStrategy = new CashPayment();
             }
+            paymentStrategy.pay(order);
         }
         //Feature Envy
         ReceiptPrinter receiptPrinter = new ReceiptPrinter();
