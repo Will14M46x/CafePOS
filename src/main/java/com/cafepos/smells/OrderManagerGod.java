@@ -18,6 +18,10 @@ public class OrderManagerGod {
     private final ReceiptPrinter receiptPrinter;
     private final int taxPercent;
 
+    //They stay for now because they are literally needed thanks to later parts of the lab requiring them :)
+    public static int TAX_PERCENT = 10;
+    public static String LAST_DISCOUNT_CODE = null;
+
     public OrderManagerGod(ProductFactory productFactory, ReceiptPrinter receiptPrinter, int taxPercent){
         this.productFactory = productFactory;
         this.receiptPrinter = receiptPrinter;
@@ -25,7 +29,7 @@ public class OrderManagerGod {
     }
     //Long Method
     //God Class
-    public String process(String recipe, int qty, String paymentType, String discountCode, boolean printReceipt) {
+    public static String process(String recipe, int qty, String paymentType, String discountCode, boolean printReceipt) {
         ProductFactory factory = new ProductFactory();
         Product product = factory.create(recipe);
         Money unitPrice;
@@ -39,13 +43,18 @@ public class OrderManagerGod {
         if (qty <= 0) qty = 1;
         Money subtotal = unitPrice.multiply(qty);
         DiscountPolicy discountPolicy = DiscountPolicyFactory.getDiscountPolicy(discountCode);
-        TaxPolicy taxPolicy = new FixedRateTaxPolicy(taxPercent);
+        TaxPolicy taxPolicy = new FixedRateTaxPolicy(TAX_PERCENT);
         PricingService pricingService = new PricingService(discountPolicy, taxPolicy);
         PricingService.PricingResult pricingResult = pricingService.price(subtotal);
 
+        if (discountCode != null) {
+            LAST_DISCOUNT_CODE = discountCode;
+        }
+
+
         PaymentStrategy paymentStrategy;
         Order order = new Order(OrderIds.next());
-        order.addItem(new LineItem(productFactory.create(recipe),qty));
+        order.addItem(new LineItem(new ProductFactory().create(recipe),qty));
 
         if (paymentType != null) {
             if (paymentType.equalsIgnoreCase("CASH")) {
@@ -59,7 +68,8 @@ public class OrderManagerGod {
             }
             paymentStrategy.pay(order);
         }
-        String out = receiptPrinter.format(recipe,qty,pricingResult,taxPercent);
+        ReceiptPrinter receiptPrinter1 = new ReceiptPrinter();
+        String out = receiptPrinter1.format(recipe,qty,pricingResult,TAX_PERCENT);
         if (printReceipt) {
             System.out.println(out);
         }
