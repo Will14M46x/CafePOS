@@ -1,8 +1,8 @@
 package com.cafepos.smells;
 
 import com.cafepos.smells.OrderManagerGod;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class Week6CharacterizationTests {
 
