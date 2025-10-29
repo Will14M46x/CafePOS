@@ -9,6 +9,9 @@ public final class Money implements Comparable<Money> {
     public static Money of(double value) {
         return new Money(new BigDecimal(value));
     }
+    public static Money of(BigDecimal value) {
+        return new Money(value);
+    }
 
     public static Money zero() {
         return new Money(BigDecimal.ZERO);
@@ -56,5 +59,9 @@ public final class Money implements Comparable<Money> {
     @Override
     public int hashCode() {
         return amount.stripTrailingZeros().hashCode();
+    }
+
+    public BigDecimal asBigDecimal() {
+        return amount;
     }
 }
