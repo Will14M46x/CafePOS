@@ -1,7 +1,7 @@
 package com.cafepos.payment;
 
 import com.cafepos.common.Money;
-import com.cafepos.domain.Order;
+import com.cafepos.order.Order;
 
 public final class CardPayment implements PaymentStrategy {
     private final String cardNumber;
@@ -16,7 +16,7 @@ public final class CardPayment implements PaymentStrategy {
 // mask card and print payment confirmation
         String maskedDetails = "****"+cardNumber.substring(cardNumber.length()-4);
         int taxPct = 10;
-        Money total = Money.of(taxPct);
+        Money total = order.totalWithTax(taxPct);
         System.out.printf("[Card] Customer paid %s EUR with card %s%n", total, maskedDetails);
     }
 }

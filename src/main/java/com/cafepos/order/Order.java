@@ -1,6 +1,8 @@
-package com.cafepos.domain;
+package com.cafepos.order;
 
 import com.cafepos.common.Money;
+import com.cafepos.domain.OrderObserver;
+import com.cafepos.domain.OrderPublisher;
 import com.cafepos.payment.PaymentStrategy;
 
 import java.math.BigDecimal;
@@ -8,7 +10,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Order implements OrderPublisher{
+public final class Order implements OrderPublisher {
     private final long id;
     private final List<LineItem> items = new ArrayList<>();
     private final List<OrderObserver> observers = new ArrayList<>();
@@ -44,7 +46,7 @@ public final class Order implements OrderPublisher{
     public long id() {
         return id;
     }
-    public List<LineItem> getItems() {
+    public List<LineItem> items() {
         return items;
     }
 

@@ -1,8 +1,9 @@
-package com.cafepos.pricing;
+package com.cafepos.checkout;
 
 import com.cafepos.catalog.Product;
 import com.cafepos.common.Money;
 import com.cafepos.factory.ProductFactory;
+import com.cafepos.pricing.PricingService;
 
 public final class CheckoutService {
     private final ProductFactory factory;

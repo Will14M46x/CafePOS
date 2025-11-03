@@ -1,12 +1,9 @@
 package com.cafepos.demo;
 
-import com.cafepos.catalog.Catalog;
-import com.cafepos.catalog.InMemoryCatalog;
-import com.cafepos.catalog.SimpleProduct;
 import com.cafepos.common.Money;
-import com.cafepos.domain.LineItem;
-import com.cafepos.domain.Order;
-import com.cafepos.domain.OrderIds;
+import com.cafepos.order.LineItem;
+import com.cafepos.order.Order;
+import com.cafepos.order.OrderIds;
 import com.cafepos.factory.ProductFactory;
 import com.cafepos.observers.CustomerNotifier;
 import com.cafepos.observers.DeliveryDesk;
@@ -153,7 +150,7 @@ public class CLImanager implements Runnable {
                     break;
                 case "P":
                     boolean runningPay = true;
-                    if (order.getItems().isEmpty()){
+                    if (order.items().isEmpty()){
                         System.out.println("Please select at least one item");
                         runningPay = false;
                     }
@@ -205,7 +202,7 @@ public class CLImanager implements Runnable {
                     }
                     break;
                 case "R":
-                    if (order.getItems().isEmpty()){
+                    if (order.items().isEmpty()){
                         System.out.println("Please select at least one item");
                     }else{
                         order.markReady();
@@ -223,8 +220,8 @@ public class CLImanager implements Runnable {
     }
 
     private void removeAllFromOrder(){
-        for (int i = 0; i < order.getItems().size(); i++){
-            order.getItems().remove(i);
+        for (int i = 0; i < order.items().size(); i++){
+            order.items().remove(i);
         }
     }
 }

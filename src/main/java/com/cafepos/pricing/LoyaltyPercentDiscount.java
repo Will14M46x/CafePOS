@@ -1,4 +1,5 @@
 package com.cafepos.pricing;
+import com.cafepos.checkout.DiscountPolicy;
 import com.cafepos.common.Money;
 public final class LoyaltyPercentDiscount implements DiscountPolicy {
     private final int percent;
