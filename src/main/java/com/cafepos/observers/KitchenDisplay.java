@@ -1,7 +1,7 @@
 package com.cafepos.observers;
 
-import com.cafepos.domain.LineItem;
-import com.cafepos.domain.Order;
+import com.cafepos.order.LineItem;
+import com.cafepos.order.Order;
 import com.cafepos.domain.OrderObserver;
 
 public class KitchenDisplay implements OrderObserver {
@@ -9,8 +9,8 @@ public class KitchenDisplay implements OrderObserver {
     public void updated(Order order, String eventType){
         if (eventType.equals("itemAdded")){
             String quantityAndName = "";
-            for (int i = 0; i < order.getItems().size(); i++){
-                LineItem li = order.getItems().get(i);
+            for (int i = 0; i < order.items().size(); i++){
+                LineItem li = order.items().get(i);
                 if (i>=1) quantityAndName += ", ";
                 quantityAndName += li.quantity() + "x "+li.product().name();
             }

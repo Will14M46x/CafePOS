@@ -2,6 +2,8 @@ package com.cafepos.domain;
 
 import com.cafepos.catalog.SimpleProduct;
 import com.cafepos.common.Money;
+import com.cafepos.order.LineItem;
+import com.cafepos.order.Order;
 import com.cafepos.payment.PaymentStrategy;
 import org.junit.Ignore;
 import org.junit.Test;

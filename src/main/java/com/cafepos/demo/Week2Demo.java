@@ -4,9 +4,9 @@ import com.cafepos.catalog.Catalog;
 import com.cafepos.catalog.InMemoryCatalog;
 import com.cafepos.catalog.SimpleProduct;
 import com.cafepos.common.Money;
-import com.cafepos.domain.LineItem;
-import com.cafepos.domain.Order;
-import com.cafepos.domain.OrderIds;
+import com.cafepos.order.LineItem;
+import com.cafepos.order.Order;
+import com.cafepos.order.OrderIds;
 
 public final class Week2Demo {
     public static void main(String[] args) {
@@ -19,7 +19,7 @@ public final class Week2Demo {
                 order.addItem(new LineItem(catalog.findById("P-CCK").orElseThrow(), 1));
         int taxPct = 10;
         System.out.println("Order #" + order.id());
-        System.out.println("Items: " + order.getItems().size());
+        System.out.println("Items: " + order.items().size());
         System.out.println("Subtotal: " + order.subtotal());
         System.out.println("Tax (" + taxPct + "%): " +
                 order.taxAtPercent(taxPct));

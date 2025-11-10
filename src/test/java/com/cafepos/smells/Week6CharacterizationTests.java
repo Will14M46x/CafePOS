@@ -1,14 +1,12 @@
 package com.cafepos.smells;
 
+import com.cafepos.checkout.DiscountPolicy;
+import com.cafepos.checkout.TaxPolicy;
 import com.cafepos.common.Money;
-import com.cafepos.factory.ProductFactory;
 import com.cafepos.pricing.*;
-import com.cafepos.smells.OrderManagerGod;
-import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-@Ignore
 public class Week6CharacterizationTests {
 
     @Test

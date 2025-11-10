@@ -1,4 +1,6 @@
-package com.cafepos.pricing;
+package com.cafepos.checkout;
+
+import com.cafepos.pricing.PricingService;
 
 public final class ReceiptPrinter {
     public String format(String recipe, int qty, PricingService.PricingResult pr, int taxPercent) {

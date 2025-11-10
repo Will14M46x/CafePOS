@@ -1,4 +1,4 @@
-package com.cafepos.domain;
+package com.cafepos.order;
 
 import com.cafepos.catalog.Product;
 import com.cafepos.common.Money;

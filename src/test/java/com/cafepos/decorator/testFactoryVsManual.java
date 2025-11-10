@@ -3,9 +3,7 @@ package com.cafepos.decorator;
 import com.cafepos.catalog.Product;
 import com.cafepos.catalog.SimpleProduct;
 import com.cafepos.common.Money;
-import com.cafepos.domain.LineItem;
 import com.cafepos.factory.ProductFactory;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
