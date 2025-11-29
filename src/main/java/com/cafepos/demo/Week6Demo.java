@@ -1,6 +1,6 @@
 package com.cafepos.demo;
 
-import com.cafepos.app.CheckoutService;
+import com.cafepos.checkout.CheckoutService;
 import com.cafepos.checkout.ReceiptPrinter;
 import com.cafepos.factory.ProductFactory;
 import com.cafepos.pricing.*;
