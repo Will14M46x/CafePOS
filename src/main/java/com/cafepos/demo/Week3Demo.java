@@ -5,7 +5,7 @@ import com.cafepos.order.OrderIds;
 import com.cafepos.catalog.InMemoryCatalog;
 import com.cafepos.catalog.SimpleProduct;
 import com.cafepos.common.Money;
-import com.cafepos.order.LineItem;
+import com.cafepos.domain.LineItem;
 import com.cafepos.domain.Order;
 import com.cafepos.payment.CardPayment;
 import com.cafepos.payment.CashPayment;

@@ -4,7 +4,7 @@ import com.cafepos.checkout.DiscountPolicy;
 import com.cafepos.checkout.ReceiptPrinter;
 import com.cafepos.checkout.TaxPolicy;
 import com.cafepos.common.Money;
-import com.cafepos.order.LineItem;
+import com.cafepos.domain.LineItem;
 import com.cafepos.domain.Order;
 import com.cafepos.order.OrderIds;
 import com.cafepos.factory.ProductFactory;

@@ -1,5 +1,5 @@
 package com.cafepos.pricing;
-import com.cafepos.checkout.CheckoutService;
+import com.cafepos.app.CheckoutService;
 import com.cafepos.checkout.DiscountPolicy;
 import com.cafepos.checkout.ReceiptPrinter;
 import com.cafepos.checkout.TaxPolicy;

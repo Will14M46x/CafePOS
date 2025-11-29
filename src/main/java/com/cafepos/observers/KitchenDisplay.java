@@ -1,6 +1,6 @@
 package com.cafepos.observers;
 
-import com.cafepos.order.LineItem;
+import com.cafepos.domain.LineItem;
 import com.cafepos.domain.Order;
 import com.cafepos.domain.OrderObserver;
 
