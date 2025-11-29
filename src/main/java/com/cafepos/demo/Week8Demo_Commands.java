@@ -1,8 +1,6 @@
 package com.cafepos.demo;
 
-import com.cafepos.factory.ProductFactory;
-import com.cafepos.observers.CustomerNotifier;
-import com.cafepos.observers.KitchenDisplay;
+import com.cafepos.domain.Order;
 import com.cafepos.order.*;
 import com.cafepos.payment.*;
 import com.cafepos.command.*;

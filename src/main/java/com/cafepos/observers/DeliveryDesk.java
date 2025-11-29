@@ -1,6 +1,6 @@
 package com.cafepos.observers;
 
-import com.cafepos.order.Order;
+import com.cafepos.domain.Order;
 import com.cafepos.domain.OrderObserver;
 
 public class DeliveryDesk implements OrderObserver {

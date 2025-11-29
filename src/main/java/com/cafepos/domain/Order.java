@@ -1,8 +1,7 @@
-package com.cafepos.order;
+package com.cafepos.domain;
 
 import com.cafepos.common.Money;
-import com.cafepos.domain.OrderObserver;
-import com.cafepos.domain.OrderPublisher;
+import com.cafepos.order.LineItem;
 import com.cafepos.payment.PaymentStrategy;
 
 import java.math.BigDecimal;
