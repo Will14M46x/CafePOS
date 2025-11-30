@@ -1,6 +1,6 @@
 package com.cafepos.command;
 
-import com.cafepos.order.Order;
+import com.cafepos.domain.Order;
 import com.cafepos.order.OrderIds;
 import org.junit.Test;
 
